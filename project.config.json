@@ -15,7 +15,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.7.7",
 	"appid": "wxd9087b6bfd39483e",
-	"projectname": "appointment",
+	"projectname": "appiontment",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

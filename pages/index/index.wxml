@@ -1,14 +1,6 @@
 <!--index.wxml-->
 
-<view class="cu-bar search bg-white " style="margin-top:100px" wx:if="{{PageCur=='basics'}}">
-    <view class="search-form round" >
-      <text class="cuIcon-search"></text>
-      <input type="text" placeholder="搜索店名" confirm-type="search"></input>
-    </view>
-    <!-- <view class="action">
-      <button class="cu-btn bg-green shadow-blur round">搜索</button>
-    </view> -->
-  </view>
+ 
 <!-- 内容 -->
 <!-- <view class="container">
   <view class="userinfo">
@@ -25,6 +17,7 @@
 
 <appointment wx:if="{{PageCur=='basics'}}"></appointment>
 <mine wx:if="{{PageCur=='about'}}"></mine>
+
 <!-- 导航 -->
 <view class="cu-bar tabbar bg-white shadow foot">
   <view class="action" bindtap="NavChange" data-cur="basics">
