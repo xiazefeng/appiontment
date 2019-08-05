@@ -1,0 +1,42 @@
+<!--index.wxml-->
+
+<view class="cu-bar search bg-white " style="margin-top:100px" wx:if="{{PageCur=='basics'}}">
+    <view class="search-form round" >
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="搜索店名" confirm-type="search"></input>
+    </view>
+    <!-- <view class="action">
+      <button class="cu-btn bg-green shadow-blur round">搜索</button>
+    </view> -->
+  </view>
+<!-- 内容 -->
+<!-- <view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view> -->
+
+<appointment wx:if="{{PageCur=='basics'}}"></appointment>
+<mine wx:if="{{PageCur=='about'}}"></mine>
+<!-- 导航 -->
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="NavChange" data-cur="basics">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/basics{{PageCur=='basics'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">预约</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="about">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/about{{PageCur=='about'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='about'?'text-green':'text-gray'}}">我的</view>
+  </view>
+</view>

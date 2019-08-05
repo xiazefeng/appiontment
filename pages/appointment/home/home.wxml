@@ -1,0 +1,8 @@
+<!--pages/appointment/home/home.wxml-->
+
+<cu-custom bgColor="bg-gradual-pink" isBack="{{false}}">
+  <!-- <view slot="backText">返回</view> -->
+  <view slot="content">预约</view>
+</cu-custom>
+ 
+
