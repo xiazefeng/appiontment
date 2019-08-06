@@ -1,62 +1,28 @@
 <!--pages/appointment/home/home.wxml-->
 
-<cu-custom bgColor="bg-gradual-pink" isBack="{{false}}">
-  <!-- <view slot="backText">返回</view> -->
+<!-- <cu-custom bgColor="bg-gradual-pink" isBack="{{false}}">
   <view slot="content">预约</view>
-</cu-custom>
-  <view class="cu-bar search bg-white ">
-    <view class="search-form round" >
-      <text class="cuIcon-search"></text>
-      <input type="text" placeholder="搜索店名" confirm-type="search"></input>
+</cu-custom> -->
+<view class="cu-bar search bg-white ">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="按搜索店名" confirm-type="search" value="{{searchTxt}}" bindinput='getSearchTxt' bindconfirm="searchSubmit"></input>
+    <view class="action">
+      <picker bindchange="PickerChange" bindcancel="PickerCancel" value="{{index}}" range="{{picker}}" range-key="tagName">
+			<view class="picker">
+				{{index?picker[index].tagName:'标签搜索'}}
+			</view>
+		</picker>
+      <text class="cuIcon-triangledownfill my-margin" ></text>
     </view>
-    <!-- <view class="action">
+  </view>
+  <!-- <view class="action">
       <button class="cu-btn bg-green shadow-blur round">搜索</button>
     </view> -->
-  </view>
- <view class="cu-card case {{isCard?'no-card':''}}">
-  <view class="cu-item shadow">
-    <view class="image">
-      <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="widthFix"></image>
-      <view class="cu-tag bg-blue">史诗</view>
-      <view class="cu-bar bg-shadeBottom">
-        <text class="text-cut">我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。</text>
-      </view>
-    </view>
-    <view class="cu-list menu-avatar">
-      <view class="cu-item">
-        <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
-        <view class="content flex-sub">
-          <view class="text-grey">正义天使 凯尔</view>
-          <view class="text-gray text-sm flex justify-between">
-            十天前
-            <view class="text-gray text-sm">
-              <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
-              <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
-              <text class="cuIcon-messagefill margin-lr-xs"></text> 30
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
 </view>
 
-<view class="cu-card article {{isCard?'no-card':''}}">
-  <view class="cu-item shadow">
-    <view class="content ">
-      <image src="http://img11.360buyimg.com/n1/s350x449_jfs/t18340/22/1753887107/268218/a2eab8a/5ad704a0N1da46666.jpg%21cc_350x449.jpg" mode="aspectFill">
-      </image>
-      
-      <view class="desc">
-        <view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
-        <view>
-          <view class="cu-tag bg-red light sm round">正义天使</view>
-          <view class="cu-tag bg-green light sm round">史诗234324</view>
-          <view class="cu-tag bg-green light sm round">史诗2131231312312312</view>
-          <view class="cu-tag bg-green light sm round">史诗</view>
-          <view class="cu-tag bg-green light sm round">史诗</view>
-        </view>
-      </view>
-    </view>
-  </view>
-</view>
+<card 
+isCard="no-card" 
+info="{{cardList}}"
+> 
+</card>

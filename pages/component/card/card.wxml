@@ -1,0 +1,27 @@
+<!--pages/component/card/card.wxml-->
+
+<view class="cu-card article solid-bottom  {{isCard?'no-card':''}} " wx:for="{{info}}" wx:key wx:for-item="cardObj" >
+  <view class="cu-item shadow" style="padding-top:10rpx;padding-bottom:10rpx;">
+    <view class="content ">
+      <image style="min-width:240rpx" src="{{cardObj.cover}}" mode="aspectFill">
+      </image>
+      
+      <view class="desc" style="width: calc(100% - 260rpx);">
+        <view class="text-content"> <!--  -->
+          <text class="card-title block-line text-cut">{{cardObj.title}}</text>
+          <view >
+           <view wx:for="{{cardObj.tags}}" wx:key="tagId" wx:for-item="item" class="cu-tag bg-{{item.color}} light sm round">{{item.tagName}}   </view>
+          </view>
+        </view>
+        <view class="flex justify-between align-center">
+          <view class="text-xl ">
+            <text class="text-price text-red">{{cardObj.price}}</text>
+          </view>
+           <view class="text-gray text-sm" >
+              <text class="margin-lr-xs">已售</text> {{cardObj.saleNum}}
+            </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

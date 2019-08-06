@@ -1,4 +1,7 @@
 {
+  "enablePullDownRefresh":true,
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "card": "/pages/component/card/card"
+  }
 }

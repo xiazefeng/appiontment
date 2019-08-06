@@ -8,7 +8,11 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    PageCur: 'basics'
+    PageCur: 'basics',
+    basicsData:{
+      cardList:[],
+      current:1,
+    }
   },
   //事件处理函数
   bindViewTap: function() {
@@ -19,6 +23,15 @@ Page({
   NavChange(e) {
     this.setData({
       PageCur: e.currentTarget.dataset.cur
+    })
+    wx.setNavigationBarTitle({
+      title: e.currentTarget.dataset.cur ==="basics"? '预约':'我的'
+    })
+
+  },
+  onShow:function(){
+    wx.setNavigationBarTitle({
+      title: this.data.PageCur === "basics" ? '预约' : '我的'
     })
   },
   onLoad: function () {
@@ -56,5 +69,28 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  onPullDownRefresh: function () {
+    console.log("下拉");
+    this.handleFetchList({action:"refresh"});
+    //模拟加载
+    setTimeout(function () {
+      console.log("加载完成");
+      // complete
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 500);
+  },
+  handleFetchList:function(values){
+    const { action } = values;
+    const { basicsData } = this.data
+    //如果是下拉刷新
+    let myCurrent = "";
+    if(action === "refresh"){
+      myCurrent = 1;
+    }
+    this.setData({ basicsData:{
+      ...basicsData,
+      myCurrent:1,
+    }})
   }
 })
