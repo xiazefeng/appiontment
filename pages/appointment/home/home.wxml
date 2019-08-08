@@ -1,9 +1,9 @@
 <!--pages/appointment/home/home.wxml-->
 
-<!-- <cu-custom bgColor="bg-gradual-pink" isBack="{{false}}">
+<cu-custom bgColor="bg-gradual-green" isBack="{{false}}">
   <view slot="content">预约</view>
-</cu-custom> -->
-<view class="cu-bar search bg-white ">
+</cu-custom>
+<view class="cu-bar search bg-white fixed " style="top:{{CustomBar}}px">
   <view class="search-form round">
     <text class="cuIcon-search"></text>
     <input type="text" placeholder="按搜索店名" confirm-type="search" value="{{searchTxt}}" bindinput='getSearchTxt' bindconfirm="searchSubmit"></input>
@@ -20,9 +20,13 @@
       <button class="cu-btn bg-green shadow-blur round">搜索</button>
     </view> -->
 </view>
+<view class="cu-bar search"></view>
+
+<view class="{{animation !='' ?'animation-fade':''}}" >
 
 <card 
-isCard="no-card" 
-info="{{cardList}}"
-> 
+  isCard="no-card" 
+  info="{{cardList}}"
+  > 
 </card>
+</view>

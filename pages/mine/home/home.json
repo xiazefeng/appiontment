@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "van-card":"/vant-weapp/dist/card/index",
+    "van-button":"/vant-weapp/dist/button/index"
+  }
 }

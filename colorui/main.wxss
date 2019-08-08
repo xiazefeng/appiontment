@@ -3740,7 +3740,7 @@ scroll-view.cu-steps .cu-item {
 	width: 100%;
 	height: 100%;
 	display: block;
-	background-color: rgba(0, 0, 0, 0.4);
+	background-color: rgba(0, 0, 0, 0.15);
 	position: absolute;
 	left: 0;
 	right: 0;

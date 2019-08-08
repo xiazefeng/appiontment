@@ -1,9 +1,9 @@
 <!--pages/component/card/card.wxml-->
 
-<view class="cu-card article solid-bottom  {{isCard?'no-card':''}} " wx:for="{{info}}" wx:key wx:for-item="cardObj" >
-  <view class="cu-item shadow" style="padding-top:10rpx;padding-bottom:10rpx;">
+<view class="cu-card article solid-bottom  {{isCard?'no-card':''}} " wx:for="{{info}}" wx:key wx:for-item="cardObj" bindtap="toItemPage" data-goods="{{cardObj}}" >
+  <view class="cu-item shadow" style="padding-top:20rpx;padding-bottom:20rpx;">
     <view class="content ">
-      <image style="min-width:240rpx" src="{{cardObj.cover}}" mode="aspectFill">
+      <image style="min-width:240rpx" src="{{cardObj.cover}}" mode="aspectFit">
       </image>
       
       <view class="desc" style="width: calc(100% - 260rpx);">

@@ -15,8 +15,8 @@
   </view>
 </view> -->
 
-<appointment wx:if="{{PageCur=='basics'}}" bind:fetchList="handleFetchList"></appointment>
-<mine wx:if="{{PageCur=='about'}}"></mine>
+<appointment wx:if="{{PageCur=='basics'}}" action="{{action}}"  bindloadFinish="loadFinish"></appointment>
+<mine wx:if="{{PageCur=='about'}}" action="{{action}}" bindloadFinish="loadFinish" ></mine>
 
 <!-- 导航 -->
 <view class="cu-bar tabbar bg-white shadow foot">
@@ -31,5 +31,24 @@
       <image src="/images/tabbar/about{{PageCur=='about'?'_cur':''}}.png"></image>
     </view>
     <view class="{{PageCur=='about'?'text-green':'text-gray'}}">我的</view>
+  </view>
+</view>
+<view class='cu-tabbar-height'></view>
+
+<!-- 登录页面 -->
+<view class="cu-modal {{needLogin?'show':''}}">
+  <view class="cu-dialog">
+    <view class="bg-img" style="background-image: url('https://ossweb-img.qq.com/images/lol/web201310/skin/big91012.jpg');height:200px;">
+      <view class="cu-bar justify-end text-white">
+        <!-- <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close "></text>
+        </view> -->
+      </view>
+    </view>
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub  solid-left" >
+      <button class='cu-btn  bg-green shadow lg margin-tb-sm' open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
+      </view>
+    </view>
   </view>
 </view>

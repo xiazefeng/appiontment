@@ -3,5 +3,6 @@
   "component": true,
   "usingComponents": {
     "card": "/pages/component/card/card"
+    
   }
 }
