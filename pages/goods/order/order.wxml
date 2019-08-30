@@ -1,0 +1,24 @@
+<!--pages/goods/order/order.wxml{{ currentGoods.goodsIndexPic}}-->
+<cu-custom bgColor="bg-gradual-pink" isCustom="{{true}}">
+  <view slot="content">提交订单</view>
+</cu-custom>
+<van-card
+  num="1"
+  price="{{currentGoods.price}}"
+ 
+  title="{{currentGoods.goodsName}}"
+  thumb="{{ currentGoods.goodsIndexPic}}"
+/>
+
+<view class="cu-bar bg-white tabbar border shop shadow foot">
+  <view class="submit" style="justify-content:space-around !important;">
+    <view class="action" style="width:80%;">
+      <view class="text-xl">
+        <text>实付：</text>
+        <text class="text-price text-red ">{{currentGoods.price}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- <view class="bg-orange light submit">查看详情</view> -->
+  <view class="bg-red submit" style="width:50%" bindtap="handleSubmit">去支付</view>
+</view>

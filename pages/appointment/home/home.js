@@ -19,183 +19,13 @@ Component({
     Custom: app.globalData.Custom,
     isCard: 'no-card',
     current: 1,
-    pageSize: 30,
-    cardList: [{
-        cover: 'http://img11.360buyimg.com/n1/s350x449_jfs/t18340/22/1753887107/268218/a2eab8a/5ad704a0N1da46666.jpg%21cc_350x449.jpg',
-        title: '良品铺子1',
-        price: '122',
-        saleNum: 111,
-      goodsInfo: '<div><h3>javascript - <em>js同步编程</em>与异步编程的区别,异步有哪些优点,为什么...</h3><div><span>2016年5月20日 - </span>从编程方式来讲当然是<em>同步编程</em>的方式更为简单,但是同步有其局限性一是假如是单线程那么一旦遇到阻塞调用,会造成整个线程阻塞,导致cpu无法得到有效利用...</div><div><div></div><span ><span ></span></span> - 百度快照</div><div ><span>为您推荐：</span>js同步和异步ajax异步和同步的区别</div></div>',
-        tags: [{
-          tagName: '好吃',
-          tagId: 1,
-          color: 'cyan',
-        }, {
-          tagName: '看得见',
-          tagId: 2,
-          color: 'blue',
-        }, {
-          tagName: '绝',
-          tagId: 3,
-          color: 'purple'
-        }]
-      },
-      {
-        cover: 'http://img11.360buyimg.com/n1/s350x449_jfs/t18340/22/1753887107/268218/a2eab8a/5ad704a0N1da46666.jpg%21cc_350x449.jpg',
-        title: '良品铺子2',
-        price: '142',
-        color: 'purple',
-        saleNum: 112,
-        tags: [{
-          tagName: '好吃',
-          tagId: 1,
-          color: 'cyan',
-        }, {
-          tagName: '看得见',
-          tagId: 2,
-          color: 'blue',
-        }, {
-          tagName: '绝',
-          tagId: 3,
-          color: 'purple'
-        }]
-      },
-      {
-        cover: 'http://img11.360buyimg.com/n1/s350x449_jfs/t18340/22/1753887107/268218/a2eab8a/5ad704a0N1da46666.jpg%21cc_350x449.jpg',
-        title: '良品铺子3',
-        price: '152',
-        color: 'blue',
-        saleNum: 113,
-        tags: [{
-          tagName: '好吃',
-          tagId: 1,
-          color: 'cyan',
-        }, {
-          tagName: '看得见',
-          tagId: 2,
-          color: 'blue',
-        }, {
-          tagName: '绝',
-          tagId: 3,
-          color: 'purple'
-        }]
-      },
-      {
-        cover: 'http://img11.360buyimg.com/n1/s350x449_jfs/t18340/22/1753887107/268218/a2eab8a/5ad704a0N1da46666.jpg%21cc_350x449.jpg',
-        title: '良品铺子34',
-        price: '1523',
-        color: 'blue',
-        saleNum: 1133,
-        tags: [{
-          tagName: '好吃',
-          tagId: 1,
-          color: 'cyan',
-        }, {
-          tagName: '看得见',
-          tagId: 2,
-          color: 'blue',
-        }, {
-          tagName: '绝',
-          tagId: 3,
-          color: 'purple'
-        }]
-      },
-      {
-        cover: 'http://img11.360buyimg.com/n1/s350x449_jfs/t18340/22/1753887107/268218/a2eab8a/5ad704a0N1da46666.jpg%21cc_350x449.jpg',
-        title: '良品铺子35',
-        price: '1552',
-        color: 'blue',
-        saleNum: 1313,
-        tags: [{
-          tagName: '好吃1',
-          tagId: 1,
-          color: 'cyan',
-        }, {
-          tagName: '看得见',
-          tagId: 2,
-          color: 'blue',
-        }, {
-          tagName: '绝',
-          tagId: 3,
-          color: 'purple'
-        }]
-      },
-      {
-        cover: 'http://img11.360buyimg.com/n1/s350x449_jfs/t18340/22/1753887107/268218/a2eab8a/5ad704a0N1da46666.jpg%21cc_350x449.jpg',
-        title: '良品铺子35',
-        price: '1552',
-        color: 'blue',
-        saleNum: 1313,
-        tags: [{
-          tagName: '好吃1',
-          tagId: 1,
-          color: 'cyan',
-        }, {
-          tagName: '看得见',
-          tagId: 2,
-          color: 'blue',
-        }, {
-          tagName: '绝',
-          tagId: 3,
-          color: 'purple'
-        }]
-      }, {
-        cover: 'http://img11.360buyimg.com/n1/s350x449_jfs/t18340/22/1753887107/268218/a2eab8a/5ad704a0N1da46666.jpg%21cc_350x449.jpg',
-        title: '良品铺子35',
-        price: '1552',
-        color: 'blue',
-        saleNum: 1313,
-        tags: [{
-          tagName: '好吃1',
-          tagId: 1,
-          color: 'cyan',
-        }, {
-          tagName: '看得见',
-          tagId: 2,
-          color: 'blue',
-        }, {
-          tagName: '绝',
-          tagId: 3,
-          color: 'purple'
-        }]
-      }, {
-        cover: 'http://img11.360buyimg.com/n1/s350x449_jfs/t18340/22/1753887107/268218/a2eab8a/5ad704a0N1da46666.jpg%21cc_350x449.jpg',
-        title: '良品铺子35',
-        price: '1552',
-        color: 'blue',
-        saleNum: 1313,
-        tags: [{
-          tagName: '好吃1',
-          tagId: 1,
-          color: 'cyan',
-        }, {
-          tagName: '看得见',
-          tagId: 2,
-          color: 'blue',
-        }, {
-          tagName: '绝',
-          tagId: 3,
-          color: 'purple'
-        }]
-      }
-    ],
+    pageSize: 10,
+    total: 0,
+    cardList: [],
     searchTxt: "",
-    picker: [{
-      tagName: '好吃',
-      tagId: 1,
-      color: 'cyan',
-    }, {
-      tagName: '看得见',
-      tagId: 2,
-      color: 'blue',
-    }, {
-      tagName: '绝',
-      tagId: 3,
-      color: 'purple'
-    }],
+    tagList: [],
     tagId: '',
     index: '',
-    animation:""
   },
 
   /**
@@ -207,13 +37,42 @@ Component({
       if (action === "refreshDown") {
         console.log("子页面下拉刷新。。。");
         this.setData({
-          loading:true,
-          animation:"fade"
+          loading: true,
+          topText: "正在加载",
+          current: 1,
         })
         this.fetchList();
       } else if (action === "refreshUp") {
-        console.log("子页面上拉加载。。。")
-        this.fetchList();
+        const {
+          current,
+          pageSize,
+          total
+        } = this.data;
+        const totalPage = total <= current * pageSize ? current : (parseInt(total / pageSize) + 1);
+        // 如果有分页，则加载，没有则直接提示无
+        if (current < totalPage) {
+          this.setData({
+            current: current+1,
+            loading: true,
+            loadingText: "正在加载中"
+          })
+          console.log("子页面上拉加载。。。")
+          this.fetchList();
+        } else {
+          this.setData({
+            loading: false,
+            loadingText: "已全部加载完毕"
+          })
+          console.log("已全部加载完毕。。。")
+        }
+      } else if (action === "stop"){
+        setTimeout(()=>{
+          this.setData({
+            loading: false,
+            topText:"",
+            loadingText: "已全部加载完毕"
+          })
+        },500)
       }
     },
   },
@@ -226,17 +85,88 @@ Component({
     fetchList: function() {
       console.log("加载中。。。");
       var that = this;
-      this.data;
-      setTimeout(
-        () => {
+      // setTimeout(
+      //   () => {
+      //     this.triggerEvent('loadFinish')
+      //     this.setData({
+      //       loading: false,
+      //       loadingText: ""
+      //     })
+      //   }, 500)
+      var searchTxt = this.data.searchTxt;
+      var tagId = this.data.tagId;
+      wx.request({
+        url: searchTxt || tagId ? app.globalData.baseUrl + '/main/goods/search' : app.globalData.baseUrl + '/main/goods/default',
+        method: 'POST',
+        data: {
+          searchKey: searchTxt,
+          tagId: tagId,
+          sysId: app.globalData.sysId,
+          pagination: {
+            current: this.data.current,
+            pageSize: this.data.pageSize
+          }
+        },
+        success: res => {
+          const {
+            TabCurNum
+          } = this.data;
+          if (this.properties.action === "refreshDown" || this.properties.action === "stop") {
+            
+            if (res.data.goodsDTOList && res.data.goodsDTOList.length > 0) {
+              this.setData({
+                loading: false,
+                topText: "已刷新",
+                ...res.data.pagination,
+                cardList: res.data.goodsDTOList,
+              })
+            } else {
+              this.setData({
+                loading: false,
+                topText: "暂无更多",
+                cardList:[]
+              })
+            }
+            this.triggerEvent('loadFinish');
+          } else if (this.properties.action === "refreshUp"){
+            //合并数据
+            let {cardList } = this.data;
+            if (res.data.goodsDTOList){
+              res.data.goodsDTOList.map(item=>{
+                cardList.push(item);
+              })
+            }
+            this.setData({
+              loading: false,
+              loadingText: "加载完成",
+              cardList: cardList
+            })
+          }
+        },
+        fail: e => {
+          console.log("加载失败：" + e);
           this.triggerEvent('loadFinish')
           this.setData({
-            loading: false
+            loading: false,
+            loadingText: "加载失败："
           })
-          that.setData({
-            animation: ''
-          });
-        }, 500)
+        },
+      })
+
+    },
+    fetchTagList: function() {
+      wx.request({
+        url: app.globalData.baseUrl + '/main/tags',
+        method: 'POST',
+        data: {
+          sysId: app.globalData.sysId
+        },
+        success: res => {
+          this.setData({
+            tagList: res.data
+          })
+        },
+      })
     },
     /**
      * 获取搜索内容
@@ -259,15 +189,30 @@ Component({
      * 标签选择
      */
     PickerChange: function(e) {
-      console.log('picker发送选择改变，携带值为', e.detail.value)
-      var index = e.detail.value;
-      var picker = this.data.picker;
-      this.setData({
-        index: index,
-        tagId: picker[index].tagId,
-        current: 1,
-      })
-      this.fetchList();
+      console.log('picker发送选择改变，携带值为', e)
+      const id = e.currentTarget.dataset.id ? e.currentTarget.dataset.id : '';
+      const oldId = this.data.tagId;
+      if(id != oldId){
+        this.setData({
+          tagId: id,
+          current: 1,
+          action:"refreshDown"
+        })
+      }else if(id === oldId){
+        this.setData({
+          tagId: '',
+          current: 1,
+          action: "refreshDown"
+        })
+      }
+      // var index = e.detail.value;
+      // var tagList = this.data.tagList;
+      // this.setData({
+      //   index: index,
+      //   tagId: tagList[index].tagId,
+      //   current: 1,
+      //   action:"refreshDown"
+      // })
     },
     /**
      * 取消选择
@@ -277,18 +222,16 @@ Component({
         index: '',
         tagId: '',
         current: 1,
+        action: "refreshDown"
       })
-      this.fetchList();
+      // this.fetchList();
     },
   },
 
   attached: function() {
-    console.log("attached");
-    const {
-      myCurrent
-    } = this.data;
-    console.log(myCurrent)
+    const {} = this.data;
     this.fetchList();
+    this.fetchTagList();
   }
 
 })

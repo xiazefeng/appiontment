@@ -3,14 +3,14 @@
 <view class="cu-card article solid-bottom  {{isCard?'no-card':''}} " wx:for="{{info}}" wx:key wx:for-item="cardObj" bindtap="toItemPage" data-goods="{{cardObj}}" >
   <view class="cu-item shadow" style="padding-top:20rpx;padding-bottom:20rpx;">
     <view class="content ">
-      <image style="min-width:240rpx" src="{{cardObj.cover}}" mode="aspectFit">
+      <image style="min-width:240rpx" src="{{cardObj.goodsIndexPic}}" mode="aspectFit">
       </image>
       
       <view class="desc" style="width: calc(100% - 260rpx);">
         <view class="text-content"> <!--  -->
-          <text class="card-title block-line text-cut">{{cardObj.title}}</text>
+          <text class="card-title block-line text-cut">{{cardObj.goodsName}}</text>
           <view >
-           <view wx:for="{{cardObj.tags}}" wx:key="tagId" wx:for-item="item" class="cu-tag bg-{{item.color}} light sm round">{{item.tagName}}   </view>
+           <view wx:for="{{cardObj.tagDTOList}}" wx:key="tagId" wx:for-item="item" class="cu-tag bg-{{item.color}} light sm round">{{item.tagValue}}   </view>
           </view>
         </view>
         <view class="flex justify-between align-center">
@@ -18,7 +18,7 @@
             <text class="text-price text-red">{{cardObj.price}}</text>
           </view>
            <view class="text-gray text-sm" >
-              <text class="margin-lr-xs">已售</text> {{cardObj.saleNum}}
+              <text class="margin-lr-xs">已售</text> {{cardObj.sale}}
             </view>
         </view>
       </view>

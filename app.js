@@ -1,17 +1,13 @@
 //app.js
 App({
   onLaunch: function () {
+    // 全局数据
+    this.globalData$ = Object.assign({}, this.globalData);
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
+    this.wxLoginRequest();
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -42,7 +38,73 @@ App({
       }
     })
   },
+  wxLoginRequest:function(){
+    // 登录
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        wx.request({
+          url: this.globalData.baseUrl + '/auth/code',
+          data: { ...res, sysId:this.globalData.sysId},
+          method: 'POST',
+          success: res => {
+            if (res.data.openId) {
+              wx.setStorageSync('userOpenId', res.data.openId);
+              wx.setStorageSync('userSessionKey', res.data.sessionKey);
+              wx.setStorageSync('userUnionId', res.data.unionId);
+            } else {
+              //TODO 如果没有获取到信息，则提示重新登陆。
+              this.globalData.loginStatus = false;
+            }
+          },
+          fail: e => {
+            console.log(e);
+          },
+        })
+      }
+    })
+  },
   globalData: {
-    userInfo: null
-  }
+    userInfo: null,
+    baseUrl:"http://172.16.10.27:9000",
+    // baseUrl:"https://wx.autoinet.cn/mini",
+    loginStatus:true,
+    sysId:1
+  },
+  /** 监听函数的对象数组 */
+  watchCallBack: {},
+
+  /** 监听列表 */
+  watchingKeys: [],
+ 
+  /** 设置全局数据 */
+  setGlobalData: function (obj) {
+    Object.keys(obj).map(key => {
+      this.globalData[key] = obj[key];
+    });
+  },
+
+  /** watch函数 */
+  watch$(key, cb) {
+    this.watchCallBack = Object.assign({}, this.watchCallBack, {
+      [key]: this.watchCallBack[key] || []
+    });
+    this.watchCallBack[key].push(cb);
+    if (!this.watchingKeys.find(x => x === key)) {
+      const that = this;
+      this.watchingKeys.push(key);
+      Object.defineProperty(this.globalData, key, {
+        configurable: true,
+        enumerable: true,
+        set: function (val) {
+          const old = that.globalData$[key];
+          that.globalData$[key] = val;
+          that.watchCallBack[key].map(func => func(val, old));
+        },
+        get: function () {
+          return that.globalData$[key];
+        }
+      });
+    }
+  },
 })

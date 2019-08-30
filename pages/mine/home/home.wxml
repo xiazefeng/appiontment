@@ -1,5 +1,6 @@
+<wxs src="../../../utils/time.wxs" module="time" />
 <scroll-view scroll-y class="scrollPage">
-  <view class="UCenter-bg">
+  <view class="UCenter-bg nav">
     <image src="{{userInfo.avatarUrl}}" class="cu-avatar round xl" mode="widthFix"></image>
     <view class="text-xl padding">{{userInfo.nickName}}
       <!-- <text class="text-df">v2.0</text> -->
@@ -28,53 +29,155 @@
   </view> -->
   <scroll-view scroll-x class="bg-white nav">
     <view class="flex text-center shadow shadow-lg">
-      <view class="cu-item flex-sub {{0==TabCur?'text-orange cur ':''}}  cu-line-height " bindtap="tabSelect" data-id="0">
+      <view class="cu-item flex-sub {{'usable'==TabCur?'text-orange cur ':''}}  cu-line-height " bindtap="tabSelect" data-num="A" data-id="usable">
         <view class="cuIcon-pay"></view>
         <view style="font-size: 25rpx;">可使用</view>
       </view>
-      <view class="cu-item flex-sub {{1==TabCur?'text-orange cur ':''}}  cu-line-height" bindtap="tabSelect" data-id="1">
+      <view class="cu-item flex-sub {{'appointed'==TabCur?'text-orange cur ':''}}  cu-line-height" bindtap="tabSelect" data-num="B" data-id="appointed">
         <text class="cuIcon-peoplelist"></text>
         <view style="font-size: 25rpx;">预约中</view>
       </view>
-      <view class="cu-item flex-sub {{2==TabCur?'text-orange cur ':''}}  cu-line-height" bindtap="tabSelect" data-id="2">
+      <view class="cu-item flex-sub {{'finished'==TabCur?'text-orange cur ':''}}  cu-line-height" bindtap="tabSelect" data-num="C" data-id="finished">
         <text class="cuIcon-roundcheck"></text>
-        <view style="font-size: 25rpx;">已完成</view>
+        <view style="font-size: 25rpx;">已使用</view>
       </view>
-      <view class="cu-item flex-sub {{3==TabCur?'text-orange cur ':''}}  cu-line-height" bindtap="tabSelect" data-id="3">
+      <view class="cu-item flex-sub {{'all'==TabCur?'text-orange cur ':''}}  cu-line-height" bindtap="tabSelect" data-num="D" data-id="all">
         <text class="cuIcon-list"></text>
         <view style="font-size: 25rpx;">全部订单</view>
       </view>
     </view>
   </scroll-view>
-  <view>
-    <block wx:if="">
-    </block>
-    <block wx:else>
-    <van-card
-        num="2"
-        tag="标签"
-        price="10.00"
-        desc="描述信息"
-        title="商品标题"
-        thumb="{{ imageURL }}"
-      >
-        <view slot="footer">
-          <van-button size="mini">按钮</van-button>
-          <van-button size="mini">按钮</van-button>
-        </view>
-      </van-card>
-      <view style="height:200px;">
-        <view class=" padding-xs flex align-center">
-          <view class="flex-sub text-center">
-            <view class=" text-xsl padding-top-xl padding-lr">
-              <text class=" cuIcon-footprint" style="color:rgba(224, 170, 7, 0.2);"></text>
+  <view class="padding-top-xs">
+    <loading loading="{{loading && action != 'refreshUp'}}" type="circular1" />
+
+    <!-- 已支付 -->
+    <block wx:if="{{'usable'==TabCur}}">
+      <van-transition name="{{transitionName}}" duration="500">
+        <block wx:if="{{A.orderList && A.orderList.length > 0 }}">
+          <van-card wx:for="{{A.orderList}}" wx:key="orderId" custom-class="custom-class" num="1" price="{{item.goodsPrice}}" thumb="{{ item.goodsPic }}">
+            <view slot="title" class="my-title ">
+              <view style="solid">{{item.goodsName}}</view>
+              <view class="text-shadow text-green">{{constants.orderStatusMap[item.orderStatus]}}</view>
             </view>
-            <view class="padding text-gray">您还没有任何订单哟~</view>
+            <view slot="bottom">
+              <view class="text-gray ">下单时间:{{time.formatTime(item.payTime)}}</view>
+            </view>
+            <view slot="footer">
+              <van-button  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" data-id="{{item.clientGoodsId}}" size="mini">预约</van-button>
+            </view>
+          </van-card>
+        </block>
+        <block wx:else>
+          <view style="height:200px;">
+            <view class=" padding-xs flex align-center">
+              <view class="flex-sub text-center">
+                <view class=" text-xsl padding-top-xl padding-lr">
+                  <text class=" cuIcon-footprint" style="color:rgba(224, 170, 7, 0.2);"></text>
+                </view>
+                <view class="padding text-gray">您还没有任何订单哟~</view>
+              </view>
+            </view>
           </view>
-        </view>
-      </view>
+        </block>
+      </van-transition>
+    </block>
+    <block wx:elif="{{'appointed'==TabCur}}">
+      <van-transition name="{{transitionName}}" duration="500">
+        <block wx:if="{{B.orderList && B.orderList.length > 0 }}">
+          <van-card wx:for="{{B.orderList}}" wx:key="orderId" custom-class="custom-class" num="1" price="{{item.goodsPrice}}" thumb="{{ item.goodsPic }}">
+            <view slot="title" class="my-title ">
+              <view style="solid">{{item.goodsName}}</view>
+              <view class="text-shadow text-orange">{{constants.orderStatusMap[item.orderStatus]}}</view>
+            </view>
+            <view slot="bottom">
+              <view class="text-gray ">下单时间:{{time.formatTime(item.payTime)}}</view>
+              <view class="text-orange text-shadow">预约时间:{{time.formatTime(item.appointTime)}}</view>
+            </view>
+            <view slot="footer">
+              <!-- <text>下单时间:2019-08-09 20:00:00</text> -->
+              <van-button size="mini" bind:click="toAppointment" data-id="{{item.clientGoodsId}}" >修改</van-button>
+            </view>
+          </van-card>
+        </block>
+        <block wx:else>
+          <view style="height:200px;">
+            <view class=" padding-xs flex align-center">
+              <view class="flex-sub text-center">
+                <view class=" text-xsl padding-top-xl padding-lr">
+                  <text class=" cuIcon-footprint" style="color:rgba(224, 170, 7, 0.2);"></text>
+                </view>
+                <view class="padding text-gray">您还没有任何订单哟~</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </van-transition>
+    </block>
+    <block wx:elif="{{'finished'==TabCur}}">
+      <van-transition name="{{transitionName}}" duration="500">
+        <block wx:if="{{C.orderList && C.orderList.length > 0 }}">
+          <van-card wx:for="{{C.orderList}}" wx:key="orderId" custom-class="custom-class" num="1" price="{{item.goodsPrice}}" thumb="{{ item.goodsPic }}">
+            <view slot="title" class="my-title ">
+              <view style="solid">{{item.goodsName}}</view>
+              <view class="text-shadow text-orange">{{constants.orderStatusMap[item.orderStatus]}}</view>
+            </view>
+            <view slot="bottom">
+              <view class="text-gray ">下单时间:{{time.formatTime(item.payTime)}}</view>
+              <view class="text-orange text-shadow">预约时间:{{time.formatTime(item.appointTime)}}</view>
+            </view>
+            <!-- <view slot="footer">
+              <van-button size="mini">修改</van-button>
+            </view> -->
+          </van-card>
+        </block>
+        <block wx:else>
+          <view style="height:200px;">
+            <view class=" padding-xs flex align-center">
+              <view class="flex-sub text-center">
+                <view class=" text-xsl padding-top-xl padding-lr">
+                  <text class=" cuIcon-footprint" style="color:rgba(224, 170, 7, 0.2);"></text>
+                </view>
+                <view class="padding text-gray">您还没有任何订单哟~</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </van-transition>
+    </block>
+    <block wx:elif="{{'all'==TabCur}}">
+      <van-transition name="{{transitionName}}" duration="500">
+        <block wx:if="{{D.orderList && D.orderList.length > 0 }}">
+          <van-card wx:for="{{D.orderList}}" wx:key="orderId" custom-class="custom-class" num="1" price="{{item.goodsPrice}}" thumb="{{ item.goodsPic }}">
+            <view slot="title" class="my-title ">
+              <view style="solid">{{item.goodsName}}</view>
+              <view class="text-shadow text-orange">{{constants.orderStatusMap[item.orderStatus]}}</view>
+            </view>
+            <view slot="bottom">
+              <view class="text-gray ">下单时间:{{time.formatTime(item.payTime)}}</view>
+              <view class="text-orange text-shadow">预约时间:{{time.formatTime(item.appointTime)}}</view>
+            </view>
+            <!-- <view slot="footer">
+             <van-button bind:click="toAppointment" size="mini">预约</van-button>
+              <van-button size="mini">修改</van-button>
+            </view> -->
+          </van-card>
+        </block>
+        <block wx:else>
+          <view style="height:200px;">
+            <view class=" padding-xs flex align-center">
+              <view class="flex-sub text-center">
+                <view class=" text-xsl padding-top-xl padding-lr">
+                  <text class=" cuIcon-footprint" style="color:rgba(224, 170, 7, 0.2);"></text>
+                </view>
+                <view class="padding text-gray">您还没有任何订单哟~</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </van-transition>
     </block>
   </view>
-
-  <view class="cu-tabbar-height"></view>
+  <view class='cu-tabbar-height' wx:if="{{loading || action === 'refreshUp'}}">
+    <loading loading="{{loading && action === 'refreshUp'}}" title="{{loadingText}}" size="20px" type="spinner" />
+  </view>
 </scroll-view>

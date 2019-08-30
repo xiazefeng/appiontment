@@ -1,14 +1,22 @@
 <!--pages/goods/detail/detail.wxml-->
-<cu-custom bgColor="bg-gradual-green" isCustom="{{true}}">
+<cu-custom bgColor="bg-gradual-pink" isCustom="{{true}}">
   <view slot="content">详情</view>
 </cu-custom>
 <!-- 轮播 -->
 <swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-  <swiper-item wx:for="{{swiperList}}" wx:key>
-    <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
-    <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+  <swiper-item wx:for="{{goodsDetailPic}}" wx:key>
+    <image src="{{item}}" mode="aspectFill" ></image>
+    <!-- <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video> -->
   </swiper-item>
 </swiper>
+<view class="cu-bar bg-white padding-lr padding-top" style="min-height:60rpx;">
+  <view class="text-lg text-bold" >
+    {{currentGoods.goodsName}}
+  </view>
+  <view>
+      已售{{currentGoods.sale}}
+  </view>
+</view>
 <view class="cu-bar bg-white solid-bottom">
   <view class=" action ">
     <text class="cuIcon-titles text-orange">
@@ -17,10 +25,10 @@
 </view>
 
 <view class="cu-card article bg-white padding">
-  <rich-text nodes="{{currentGoods.goodsInfo}}"></rich-text>
+  <rich-text nodes="{{currentGoods.goodsDetailContent}}"></rich-text>
 </view>
 
-<view class="cu-bar bg-white solid-bottom margin-top-sm">
+<!-- <view class="cu-bar bg-white solid-bottom margin-top-sm">
   <view class=" action ">
     <text class="cuIcon-titles text-orange">
   </text> 商品参数
@@ -29,7 +37,7 @@
 
 <view class="cu-card article bg-white padding">
   <rich-text nodes="{{currentGoods.goodsInfo}}"></rich-text>
-</view>
+</view> -->
 
 <view class='cu-tabbar-height'></view>
 <view class="cu-bar bg-white tabbar border shop shadow foot">

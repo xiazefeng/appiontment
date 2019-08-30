@@ -2,6 +2,8 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
       "appointment": "/pages/appointment/home/home",
-      "mine": "/pages/mine/home/home"
+      "mine": "/pages/mine/home/home",
+      "loading": "/pages/component/loading/index",
+      "van-button": "/vant-weapp/dist/button/index"
   }
 }

@@ -5,7 +5,9 @@
     "pages/appointment/home/home",
     "pages/mine/home/home",
     "pages/goods/home/home",
-    "pages/goods/detail/detail"
+    "pages/goods/detail/detail",
+    "pages/mine/appointment/index",
+    "pages/goods/order/order"
   ],
   "window": {
     "backgroundTextStyle": "light",

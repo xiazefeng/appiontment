@@ -1,0 +1,29 @@
+
+<block wx:if="{{type==='circular'}}">
+  <!-- <van-loading class="my-loading" size="{{size}}" wx:if="{{loading}}" /> -->
+  <view class="my-spinner">
+    <van-loading size="15px" wx:if="{{loading}}" />
+    <view class="title" wx:if="{{title && title != ''}}">{{title}}</view>
+  </view>
+</block>
+<block wx:elif="{{type==='spinner'}}">
+  <view class="my-spinner">
+    <van-loading size="{{size}}" type="spinner" wx:if="{{loading}}" />
+    <view class="title" wx:if="{{title && title != ''}}">{{title}}</view>
+  </view>
+</block>
+
+<block wx:if="{{type==='circular1'}}">
+  <van-loading class="my-loading" size="{{size}}" wx:if="{{loading}}" />
+</block>
+<block wx:if="{{type==='spinner1'}}" >
+  <view class="page-loading-warp">
+      <view class="ant-spin ant-spin-lg ant-spin-spinning">
+        <text class="ant-spin-dot ant-spin-dot-spin"
+          ><text class="ant-spin-dot-item"></text><text class="ant-spin-dot-item"></text
+          ><text class="ant-spin-dot-item"></text><text class="ant-spin-dot-item"></text
+        ></text>
+       <text class="ant-title">{{title}}</text>
+      </view>
+    </view>
+</block>

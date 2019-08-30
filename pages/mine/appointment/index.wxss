@@ -1,0 +1,38 @@
+/* pages/mine/appointment/index.wxss */
+.cu-item{
+  min-height: 80rpx !important;
+}
+.cu-item:last-child{
+  padding-bottom: 30rpx;
+}
+page{
+  /* padding-top: 100rpx; */
+}
+.c-active{
+  position: relative;
+  background: white !important;
+  color:white !important;
+}
+.c-active::before{
+  font-family: "cuIcon";
+	font-size: 40rpx;
+	font-style: normal;
+  /* color: green !important; */
+  /* content:"\e645"; */
+  content:'';
+  position: absolute;
+  right: 30rpx;
+}
+.disabled{
+  	opacity: 0.4;
+}
+.disabled::before{
+   font-family: "cuIcon";
+	font-size: 40rpx;
+	font-style: normal;
+  /* color: green !important; */
+  /* content:"\e646"; */
+  content:'';
+  position: absolute;
+  right: 30rpx;
+}

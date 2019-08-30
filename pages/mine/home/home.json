@@ -1,7 +1,11 @@
 {
+  "enablePullDownRefresh": true,
   "component": true,
   "usingComponents": {
     "van-card":"/vant-weapp/dist/card/index",
-    "van-button":"/vant-weapp/dist/button/index"
+    "van-button":"/vant-weapp/dist/button/index",
+    "van-transition": "/vant-weapp/dist/transition/index",
+    "card": "/pages/component/card/card",
+    "loading": "/pages/component/loading/index"
   }
 }

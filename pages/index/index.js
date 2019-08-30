@@ -7,7 +7,6 @@
  *                  3:如果数据为空或者小于pageSize，则置为不可继续加载状态。
  */
 const app = getApp()
-
 Page({
   data: {
     motto: 'Hello World',
@@ -17,6 +16,7 @@ Page({
     PageCur: 'basics',
     action: 'stop',
     needLogin: false, //是否需要登录
+    aa: true
   },
   //事件处理函数
   bindViewTap: function() {
@@ -34,11 +34,49 @@ Page({
 
   },
   onShow: function() {
+    var that = this;
+    const { aa} = this.data;
+    //检查session是否有效，用来判断用户手机号是否获取过。
+    wx.checkSession({
+      success() {
+        // session_key 未过期，并且在本生命周期一直有效
+      },
+      fail() {
+        // session_key 已经失效，需要重新执行登录流程
+        // wx.login() // 重新登录
+        app.wxLoginRequest();
+      }
+    })
+    
+    let pages = getCurrentPages();
+    let currPage = pages[pages.length - 1]; //当前页
+    if (currPage.data.appoint) {
+     that.setData({
+       action:"refreshDown",
+       defaultTabCur:"appointed"
+     })
+    }
     wx.setNavigationBarTitle({
       title: this.data.PageCur === "basics" ? '预约' : '我的'
-    })
+    });
+
   },
   onLoad: function() {
+    // console.log(app.globalData.loginStatus)
+    // if (!app.globalData.loginStatus){
+    //   this.setData({
+    //     needLogin: true
+    //   })
+    //   return;
+    // }
+    app.watch$("loginStatus", (val, old) => {
+      console.log(val,old ); 
+      if (!val) {
+        this.setData({
+          needLogin: true
+        })
+      }
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -58,6 +96,8 @@ Page({
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
+          console.log(encryptedData);
+          console.log(iv);
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
@@ -72,13 +112,15 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true,
-      needLogin: false,
-    })
+    if (e && e.detail.errMsg == 'getUserInfo:ok'){
+      app.wxLoginRequest();
+      app.globalData.userInfo = e.detail.userInfo
+      this.setData({
+        userInfo: e.detail.userInfo,
+        hasUserInfo: true,
+        needLogin: false,
+      })
+    }
   },
   onPullDownRefresh: function() {
     console.log("下拉");
@@ -108,5 +150,15 @@ Page({
       action: "stop"
     });
     wx.stopPullDownRefresh();
+  },
+  reloadCenter:function(){
+    this.setData({
+      action: "refreshDown"
+    });
+  },
+  getPhoneNumber: function (e) {
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
   }
 })

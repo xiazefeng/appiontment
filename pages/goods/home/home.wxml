@@ -1,28 +1,36 @@
 <!--pages/goods/home/home.wxml-->
-<cu-custom bgColor="bg-gradual-green" isCustom="{{true}}">
+<cu-custom bgColor="bg-gradual-pink" isCustom="{{true}}">
   <view slot="content">商品</view>
 </cu-custom>
 <!-- 图片 -->
-<view class="bg-img bg-mask padding-top-xs flex align-end" style="background-image: url('{{currentGoods.cover}}');height: 414rpx;background-size:contain;background-color:#ffffff;">
+<view class="bg-img bg-mask padding-top-xs flex align-end" style="background-image: url('{{currentGoods.goodsIntroductionPic}}');height: 414rpx;background-size:contain;background-color:#ffffff;">
   <view class="padding-lr-sm flex-sub" style="background-color:rgba(0, 0, 0, 0.3);color:white">
-    <view class="padding-xs text-lg" wx:if="{{currentGoods.title}}">
+    <!-- <view class="padding-xs text-lg" wx:if="{{currentGoods.title}}">
       {{currentGoods.title}}
-    </view>
-    <view class="padding-lr-xs" wx:if="{{currentGoods.desc}}">
-      {{currentGoods.desc}}
-    </view>
+    </view> -->
+    <!-- <view class="padding-lr-xs" wx:if="{{currentGoods.goodsIntroductionContent}}">
+      {{currentGoods.goodsIntroductionContent}}
+    </view> -->
   </view>
 </view>
 
+
+<view class="cu-bar bg-white padding-lr padding-top" style="min-height:60rpx;">
+  <view class="text-lg text-bold" >
+    {{currentGoods.goodsName}}
+  </view>
+  <view>
+    已售{{currentGoods.sale}}
+  </view>
+</view>
 <view class="cu-bar bg-white solid-bottom">
   <view class=" action ">
-  <text class="cuIcon-titles text-orange">
-  </text>
-  商品简介
+    <text class="cuIcon-titles text-orange">
+  </text> 商品简介
   </view>
 </view>
 <view class="cu-card article bg-white padding">
-  <rich-text nodes="{{currentGoods.goodsInfo}}"></rich-text>
+  <rich-text nodes="{{currentGoods.goodsIntroductionContent}}"></rich-text>
 </view>
 
 <view class='cu-tabbar-height'></view>
@@ -34,10 +42,10 @@
         <text class="text-price text-red ">{{currentGoods.price}}</text>
       </view>
     </view>
-    <view class="action" bindtap="toDetailPage">
-      <view class="cuIcon-read" ></view>
+    <!-- <view class="action" bindtap="toDetailPage">
+      <view class="cuIcon-read"></view>
       查看详情
-    </view>
+    </view> -->
   </view>
   <!-- <view class="bg-orange light submit">查看详情</view> -->
   <view class="bg-red submit" style="width:50%" bindtap="handleBuy">立即购买</view>

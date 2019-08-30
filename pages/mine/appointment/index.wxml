@@ -1,0 +1,41 @@
+<!--pages/mine/appointment/index.wxml-->
+<cu-custom bgColor="bg-gradual-pink" isCustom="{{true}}">
+  <view slot="content">预约</view>
+</cu-custom>
+<!-- <view class="cu-bar bg-white solid-bottom" >
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text> 选择预约时间段
+    <text bindtap="showTime" class="margin text-orange" style="text-decoration:underline">{{currentDate_show}}</text>
+
+  </view> -->
+<!-- <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="menuModal">设置</button>
+  </view> -->
+<!-- </view> -->
+<van-cell-group>
+  <van-cell title="选择预约时间段" bind:click="showTime" is-link="{{true}}" value="{{currentDate_show}}" size="small" />
+</van-cell-group>
+<view class="padding-sm flex flex-wrap">
+  <block wx:for="{{appointList}}">
+    <view class="padding-xs {{active == item.startIndex ? 'c-active' : '' }} {{item.appointNumber == 0 ? 'disabled':''}}" bindtap="activeChoose" data-key="{{item.startIndex}}" data-num="{{item.appointNumber}}">
+      <view class="cu-tag bg-red">{{item.startTime}}</view>
+    </view>
+
+  </block>
+</view>
+<van-cell-group>
+
+  <van-field value="{{ phone }}" label="手机号" placeholder="请输入手机号" error-message="{{errorMessage}}" border="{{ false }}" bind:blur="phoneChange" />
+      <van-field value="{{ sms }}" wx:if="{{showCodeCell}}" center clearable label="短信验证码" placeholder="请输入短信验证码" border="{{ false }}" use-button-slot>
+        <button slot="button" class="cu-btn line-gray">发送验证码</button>
+      </van-field>
+</van-cell-group>
+
+<view class="cu-bar tabbar bg-white foot" style="z-index:100 !important;">
+  <view class="bg-gradual-red submit" bindtap="appointSubmit">立即预约</view>
+</view>
+
+<van-popup show="{{ show }}" position="bottom" overlay="{{ true }}" show-toolbar="{{true}}" bind:close="onClose">
+  <van-datetime-picker type="date" value="{{ currentDate }}" bind:input="onInput" min-date="{{ minDate }}" max-date="{{maxDate}}" bind:confirm="chooseTime" bind:cancel="onClose" formatter="{{ formatter }}" />
+
+</van-popup>

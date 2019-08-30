@@ -22,10 +22,8 @@ Page({
    * 立即购买
    */
   handleBuy:function(){
-    wx.showToast({
-      title:"支付成功",
-      icon: 'success',
-      duration: 2000,
+    wx.navigateTo({
+      url: '../order/order'
     })
   },
   toDetailPage:function(){

@@ -1,32 +1,39 @@
 <!--pages/appointment/home/home.wxml-->
 
-<cu-custom bgColor="bg-gradual-green" isBack="{{false}}">
-  <view slot="content">预约</view>
-</cu-custom>
-<view class="cu-bar search bg-white fixed " style="top:{{CustomBar}}px">
-  <view class="search-form round">
-    <text class="cuIcon-search"></text>
-    <input type="text" placeholder="按搜索店名" confirm-type="search" value="{{searchTxt}}" bindinput='getSearchTxt' bindconfirm="searchSubmit"></input>
-    <view class="action">
-      <picker bindchange="PickerChange" bindcancel="PickerCancel" value="{{index}}" range="{{picker}}" range-key="tagName">
-			<view class="picker">
-				{{index?picker[index].tagName:'标签搜索'}}
-			</view>
-		</picker>
-      <text class="cuIcon-triangledownfill my-margin" ></text>
-    </view>
-  </view>
-  <!-- <view class="action">
-      <button class="cu-btn bg-green shadow-blur round">搜索</button>
+<!-- padding-top 解决头部fixed偏移 -->
+<view style="padding-top:{{tagList && tagList.length > 0 ? 74 : 10 }}rpx">
+  <cu-custom bgColor="bg-gradual-pink" isBack="{{false}}">
+    <view slot="content">预约</view>
+  </cu-custom>
+  <view class="cu-bar search bg-white fixed " style="top:{{CustomBar}}px;display:block;padding-top:10rpx;min-height:90rpx;">
+    <view class="search-form round">
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="按搜索店名" confirm-type="search" value="{{searchTxt}}" bindinput='getSearchTxt' bindconfirm="searchSubmit"></input>
+      <!-- <view class="action">
+      <picker bindchange="PickerChange" bindcancel="PickerCancel" value="{{index}}" range="{{tagList}}" range-key="tagValue">
+        <view class="picker">
+          {{index?tagList[index].tagValue:'标签搜索'}}
+        </view>
+      </picker>
+      <text class="cuIcon-triangledownfill my-margin"></text>
     </view> -->
-</view>
-<view class="cu-bar search"></view>
+    </view>
 
-<view class="{{animation !='' ?'animation-fade':''}}" >
 
-<card 
-  isCard="no-card" 
-  info="{{cardList}}"
-  > 
-</card>
+    <scroll-view wx:if="{{tagList && tagList.length > 0}}" scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+      <view class="cu-item {{index==TabCur?'text-green cur':''}} bg-white" wx:for="{{tagList}}" style="height:80rpx !important;line-height: 80rpx !important;" wx:key bindtap="PickerChange" data-id="{{item.tagId}}">
+        <view class="cu-tag  {{item.tagId === tagId ? 'line-'+ item.color  : 'item-gray' }} "> {{tagList[index].tagValue}} </view>
+      </view>
+    </scroll-view>
+  </view>
+  <view>
+    <view style="height:80rpx;display: flex;justify-content: center;align-items: flex-end;" >
+    <loading title="{{topText?topText:'下拉刷新'}}" loading="{{true}}" type="spinner1" />
+      <!-- <loading title="{{loadingText}}" loading="{{loading && action != 'refreshUp'}}" /> -->
+    </view>
+    <card isCard="no-card"  info="{{cardList}}"></card>
+  </view>
+  <view class='cu-tabbar-height' wx:if="{{loading || action === 'refreshUp'}}">
+    <loading loading="{{loading && action === 'refreshUp'}}" title="{{loadingText}}" size="20px" type="spinner" />
+  </view>
 </view>

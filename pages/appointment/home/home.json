@@ -2,7 +2,7 @@
   "enablePullDownRefresh":true,
   "component": true,
   "usingComponents": {
-    "card": "/pages/component/card/card"
-    
+    "card": "/pages/component/card/card",
+    "loading":"/pages/component/loading/index"
   }
 }

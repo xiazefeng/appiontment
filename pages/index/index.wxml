@@ -16,7 +16,7 @@
 </view> -->
 
 <appointment wx:if="{{PageCur=='basics'}}" action="{{action}}"  bindloadFinish="loadFinish"></appointment>
-<mine wx:if="{{PageCur=='about'}}" action="{{action}}" bindloadFinish="loadFinish" ></mine>
+<mine wx:if="{{PageCur=='about'}}" action="{{action}}" defaultTabCur="{{defaultTabCur}}" bindloadFinish="loadFinish" ></mine>
 
 <!-- 导航 -->
 <view class="cu-bar tabbar bg-white shadow foot">
@@ -33,7 +33,8 @@
     <view class="{{PageCur=='about'?'text-green':'text-gray'}}">我的</view>
   </view>
 </view>
-<view class='cu-tabbar-height'></view>
+<view class='cu-tabbar-height'>
+</view>
 
 <!-- 登录页面 -->
 <view class="cu-modal {{needLogin?'show':''}}">
