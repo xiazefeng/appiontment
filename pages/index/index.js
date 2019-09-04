@@ -19,11 +19,11 @@ Page({
     aa: true
   },
   //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
+  // bindViewTap: function() {
+  //   wx.navigateTo({
+  //     url: '../logs/logs'
+  //   })
+  // },
   NavChange(e) {
     this.setData({
       PageCur: e.currentTarget.dataset.cur
@@ -48,26 +48,50 @@ Page({
       }
     })
     
-    let pages = getCurrentPages();
-    let currPage = pages[pages.length - 1]; //当前页
-    if (currPage.data.appoint) {
-     that.setData({
-       action:"refreshDown",
-       defaultTabCur:"appointed"
-     })
-    }
+    // let pages = getCurrentPages();
+    // let currPage = pages[pages.length - 1]; //当前页
+    // if (currPage.data.appoint) {
+    //  that.setData({
+    //    action:"refreshDown",
+    //    defaultTabCur:"appointed"
+    //  })
+    // }
     wx.setNavigationBarTitle({
       title: this.data.PageCur === "basics" ? '预约' : '我的'
     });
-
+    const openId = wx.getStorageSync("userOpenId");
+    wx.request({
+      url: app.globalData.baseUrl + '/center/me',
+      method: 'POST',
+      data: {
+        sysId: app.globalData.sysId,
+        openId: openId,
+      },
+      success: res => {
+        if (res.data.clientPhone){
+          wx.setStorageSync('userPhone', res.data.clientPhone);
+        }
+      }
+    })
+    this.reloadCenter();
   },
-  onLoad: function() {
+  onLoad: function(options) {
     // console.log(app.globalData.loginStatus)
     // if (!app.globalData.loginStatus){
     //   this.setData({
     //     needLogin: true
     //   })
     //   return;
+    // }
+    // if (options.PageCur && options.PageCur ==='about'){
+    //   this.setData({
+    //     PageCur: 'about',
+    //     defaultTabCur:'usable',
+    //     action : "refreshDown"
+    //   })
+    //   wx.setNavigationBarTitle({
+    //     title: '我的'
+    //   })
     // }
     app.watch$("loginStatus", (val, old) => {
       console.log(val,old ); 
@@ -156,9 +180,5 @@ Page({
       action: "refreshDown"
     });
   },
-  getPhoneNumber: function (e) {
-    console.log(e.detail.errMsg)
-    console.log(e.detail.iv)
-    console.log(e.detail.encryptedData)
-  }
+ 
 })

@@ -1,11 +1,12 @@
 /* pages/mine/home/home.wxss */
 .UCenter-bg {
-  background-image: url(https://image.weilanwl.com/color2.0/index.jpg);
+  background-image: url(https://yunxunjg-yunmall.oss-cn-hangzhou.aliyuncs.com/MaiaSalon_logo_1.jpg);
   background-size: cover;
+  background-position: center center;
   height: 550rpx;
   display: flex;
   justify-content: center;
-  padding-top: 40rpx;
+  padding-top: 80rpx;
   overflow: hidden;
   position: relative;
   flex-direction: column;

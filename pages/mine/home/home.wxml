@@ -8,7 +8,7 @@
     <!-- <view class="margin-top-sm">
       <text>By:文晓港</text>
     </view> -->
-    <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+    <image src="/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
   </view>
   <!-- <view class="padding flex text-center text-grey bg-white shadow-warp">
     <view class="flex flex-sub flex-direction solid-right">
@@ -54,16 +54,21 @@
     <block wx:if="{{'usable'==TabCur}}">
       <van-transition name="{{transitionName}}" duration="500">
         <block wx:if="{{A.orderList && A.orderList.length > 0 }}">
-          <van-card wx:for="{{A.orderList}}" wx:key="orderId" custom-class="custom-class" num="1" price="{{item.goodsPrice}}" thumb="{{ item.goodsPic }}">
+          <van-card wx:for="{{A.orderList}}" wx:key="orderId" custom-class="custom-class" num="{{item.amount}}" price="{{item.goodsPrice}}" thumb="{{ item.goodsPic }}">
             <view slot="title" class="my-title ">
               <view style="solid">{{item.goodsName}}</view>
               <view class="text-shadow text-green">{{constants.orderStatusMap[item.orderStatus]}}</view>
             </view>
             <view slot="bottom">
-              <view class="text-gray ">下单时间:{{time.formatTime(item.payTime)}}</view>
+              <view class="text-gray ">下单时间:{{time.formatTime(item.createTime)}}</view>
             </view>
             <view slot="footer">
-              <van-button  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" data-id="{{item.clientGoodsId}}" size="mini">预约</van-button>
+            <block wx:if="{{userPhone}}" >
+              <van-button data-id="{{item.clientGoodsId}}" bindtap="toAppointment" size="mini">预约</van-button>
+            </block>
+            <block wx:elif="{{!userPhone}}">
+              <van-button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" data-id="{{item.clientGoodsId}}" size="mini">预约</van-button>
+            </block>
             </view>
           </van-card>
         </block>
@@ -90,12 +95,12 @@
               <view class="text-shadow text-orange">{{constants.orderStatusMap[item.orderStatus]}}</view>
             </view>
             <view slot="bottom">
-              <view class="text-gray ">下单时间:{{time.formatTime(item.payTime)}}</view>
-              <view class="text-orange text-shadow">预约时间:{{time.formatTime(item.appointTime)}}</view>
+              <view class="text-gray ">下单时间:{{time.formatTime(item.createTime)}}</view>
+              <view class="text-orange text-shadow">预约时间:{{time.formatDate(item.appointDay)}} {{item.startTime}} - {{item.endTime}}</view>
             </view>
             <view slot="footer">
               <!-- <text>下单时间:2019-08-09 20:00:00</text> -->
-              <van-button size="mini" bind:click="toAppointment" data-id="{{item.clientGoodsId}}" >修改</van-button>
+              <van-button size="mini" bind:click="toAppointment" data-id="{{item.clientGoodsId}}" data-aid="{{item.appointId}}">修改</van-button>
             </view>
           </van-card>
         </block>
@@ -122,8 +127,8 @@
               <view class="text-shadow text-orange">{{constants.orderStatusMap[item.orderStatus]}}</view>
             </view>
             <view slot="bottom">
-              <view class="text-gray ">下单时间:{{time.formatTime(item.payTime)}}</view>
-              <view class="text-orange text-shadow">预约时间:{{time.formatTime(item.appointTime)}}</view>
+              <view class="text-gray ">下单时间:{{time.formatTime(item.createTime)}}</view>
+              <view class="text-orange text-shadow">预约时间:{{time.formatDate(item.appointDay)}} {{item.startTime}} - {{item.endTime}}</view>
             </view>
             <!-- <view slot="footer">
               <van-button size="mini">修改</van-button>
@@ -153,8 +158,8 @@
               <view class="text-shadow text-orange">{{constants.orderStatusMap[item.orderStatus]}}</view>
             </view>
             <view slot="bottom">
-              <view class="text-gray ">下单时间:{{time.formatTime(item.payTime)}}</view>
-              <view class="text-orange text-shadow">预约时间:{{time.formatTime(item.appointTime)}}</view>
+              <view class="text-gray ">下单时间:{{time.formatTime(item.createTime)}}</view>
+              <!-- <view class="text-orange text-shadow">预约时间:{{time.formatDate(item.appointDay)}} {{item.startTime}} - {{item.endTime}}</view> -->
             </view>
             <!-- <view slot="footer">
              <van-button bind:click="toAppointment" size="mini">预约</van-button>

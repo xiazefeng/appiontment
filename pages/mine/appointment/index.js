@@ -14,6 +14,7 @@ Page({
     currentDate_show: '',
     showCodeCell:false,
     errorMessage:'',
+    userPhone:'',
     formatter(type, value) {
       if (type === 'year') {
         return `${value}年`;
@@ -29,7 +30,12 @@ Page({
    */
   onLoad: function(options) {
     const curr = this.dateFormat(new Date(), 'yyyy-MM-dd');
-
+    const userPhone = wx.getStorageSync('userPhone');
+    if (userPhone){
+      this.setData({
+        userPhone
+      })
+    }
     this.setData({
       currentDate_show: curr,
       ...options
@@ -132,11 +138,20 @@ Page({
     this.onClose();
   },
   phoneChange: function (e){
-    if (this.isPoneAvailable(e.detail.value)){
-      this.setData({
-        showCodeCell:true,
-        errorMessage:''
-      })
+    if (this.isPoneAvailable(e.detail)){
+      const userPhone = wx.getStorageSync("userPhone");
+      //如果号码不是绑定的号码，则弹出验证码
+      if(userPhone != e.detail){
+        this.setData({
+          showCodeCell:true,
+          errorMessage:''
+        })
+      }else{
+        this.setData({
+          showCodeCell: false,
+          errorMessage: ''
+        })
+      }
     }else{
       this.setData({
         showCodeCell:false,
@@ -176,7 +191,8 @@ Page({
       clientGoodsId,
       orderId,
       active,
-      currentDate_show
+      currentDate_show,
+      appointId,
     } = this.data;
     const openId = wx.getStorageSync("userOpenId");
     const sysId = app.globalData.sysId;
@@ -189,6 +205,7 @@ Page({
         openId: openId,
         sysId: sysId,
         appointDay: currentDate_show.replace(/-/g, ""),
+        appointId
       },
       success: res => {
         if (res.data.retCode == "success") {
@@ -199,7 +216,8 @@ Page({
               var pages = getCurrentPages();
               var prevPage = pages[pages.length - 2]; //上一页
               prevPage.setData({
-                appoint: true
+                "A.isFrist": true,
+                "B.isFrist": true
               })
               wx.navigateBack();
             }

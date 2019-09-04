@@ -37,7 +37,7 @@ Component({
     },
     D: {
       current: 1,
-      pageSize: 5,
+      pageSize: 10,
       total: 0,
       isFrist: true,
     }
@@ -59,16 +59,16 @@ Component({
 
   observers: {
     'defaultTabCur': function(defaultTabCur) {
-      if (defaultTabCur === "appointed") {
+      if (defaultTabCur === "usable") {
         this.setData({
-          TabCur: "appointed",
-          TabCurNum: "B",
+          TabCur: "usable",
+          TabCurNum: "A",
           "A.isFrist": true,
           "B.isFirst": true,
           "C.isFirst": true,
           "D.isFirst": true,
         })
-        this.triggerEvent('reloadCenter')
+        // this.triggerEvent('reloadCenter')
       }
     },
     'action': function(action) {
@@ -110,6 +110,11 @@ Component({
           })
           console.log("已全部加载完毕。。。")
         }
+      }else{
+        this.setData({
+          loading: false,
+          loadingText: "已全部加载完毕"
+        })
       }
     },
   },
@@ -129,7 +134,7 @@ Component({
       //     })
       //   }, 500)
       wx.request({
-        url: app.globalData.baseUrl + '/center/goods/' + TabCur,
+        url: TabCur !== 'all' ? app.globalData.baseUrl + '/center/goods/' + TabCur : app.globalData.baseUrl +'/center/order',
         method: 'POST',
         data: {
           sysId: app.globalData.sysId,
@@ -155,7 +160,17 @@ Component({
                   isFrist: false,
                 }
               })
-            } else {
+            } else if (res.data.orderDTOList && res.data.orderDTOList.length > 0){
+              this.setData({
+                loading: false,
+                loadingText: "",
+                [TabCurNum]: {
+                  ...res.data.pagination,
+                  orderList: res.data.orderDTOList,
+                  isFrist: false,
+                }
+              })
+            }else {
               this.setData({
                 loading: false,
                 loadingText: "",
@@ -175,7 +190,12 @@ Component({
               res.data.clientGoodsVOList.map(item => {
                 orderList.push(item);
               })
+            } else if (res.data.orderDTOList && res.data.orderDTOList.length > 0){
+              res.data.orderDTOList.map(item => {
+                orderList.push(item);
+              })
             }
+            
             const key = TabCurNum + ".orderList";
             this.setData({
               loading: false,
@@ -214,14 +234,48 @@ Component({
     //跳转到预约界面
     toAppointment(e) {
       const id = e.currentTarget.dataset.id;
-      wx.navigateTo({
-        url: '/pages/mine/appointment/index?clientGoodsId=' + id,
+      const appointId = e.currentTarget.dataset.aid;
+      if (appointId){
+        wx.navigateTo({
+          url: '/pages/mine/appointment/index?clientGoodsId=' + id + '&appointId=' + appointId,
+        })
+      }else{
+        wx.navigateTo({
+          url: '/pages/mine/appointment/index?clientGoodsId=' + id,
+        })
+      }
+    },
+    getPhoneNumber: function (e) {
+      const openId = wx.getStorageSync("userOpenId");
+      wx.request({
+        url: app.globalData.baseUrl + '/auth/phone',
+        method: 'POST',
+        data: {
+          sysId: app.globalData.sysId,
+          openId,
+          ...e.detail,
+        },
+        success: res => {
+          if (res && res.data.phoneNumber){
+            wx.setStorageSync("userPhone", res.data.phoneNumber);
+            this.setData({
+              userPhone: res.data.phoneNumber
+            })
+            const id = e.currentTarget.dataset.id;
+            console.log(id)
+            wx.navigateTo({
+              url: '/pages/mine/appointment/index?clientGoodsId=' + id,
+            })
+          }
+         }
       })
     }
   },
   attached: function() {
+    const userPhone = wx.getStorageSync('userPhone');
     this.setData({
-      userInfo: app.globalData.userInfo
+      userInfo: app.globalData.userInfo,
+      userPhone
     })
     this.setData({
       action: "refreshDown"

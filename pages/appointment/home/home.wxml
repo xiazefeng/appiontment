@@ -2,7 +2,7 @@
 
 <!-- padding-top 解决头部fixed偏移 -->
 <view style="padding-top:{{tagList && tagList.length > 0 ? 74 : 10 }}rpx">
-  <cu-custom bgColor="bg-gradual-pink" isBack="{{false}}">
+  <cu-custom bgColor="bg-gradual-blue" isBack="{{false}}">
     <view slot="content">预约</view>
   </cu-custom>
   <view class="cu-bar search bg-white fixed " style="top:{{CustomBar}}px;display:block;padding-top:10rpx;min-height:90rpx;">

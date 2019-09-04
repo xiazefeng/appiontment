@@ -1,5 +1,5 @@
 <!--pages/goods/home/home.wxml-->
-<cu-custom bgColor="bg-gradual-pink" isCustom="{{true}}">
+<cu-custom bgColor="bg-gradual-blue" isCustom="{{true}}">
   <view slot="content">商品</view>
 </cu-custom>
 <!-- 图片 -->
@@ -13,7 +13,12 @@
     </view> -->
   </view>
 </view>
-
+<!-- <swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+  <swiper-item wx:for="{{currentGoods.goodsDetailPic}}" wx:key>
+    <image src="{{item}}" mode="aspectFill" ></image> -->
+    <!-- <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video> -->
+  <!-- </swiper-item>
+</swiper> -->
 
 <view class="cu-bar bg-white padding-lr padding-top" style="min-height:60rpx;">
   <view class="text-lg text-bold" >

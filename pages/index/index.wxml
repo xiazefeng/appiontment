@@ -24,13 +24,13 @@
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/basics{{PageCur=='basics'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">预约</view>
+    <view class="{{PageCur=='basics'?'text-blue':'text-gray'}}">预约</view>
   </view>
   <view class="action" bindtap="NavChange" data-cur="about">
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/about{{PageCur=='about'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='about'?'text-green':'text-gray'}}">我的</view>
+    <view class="{{PageCur=='about'?'text-blue':'text-gray'}}">我的</view>
   </view>
 </view>
 <view class='cu-tabbar-height'>
@@ -39,7 +39,7 @@
 <!-- 登录页面 -->
 <view class="cu-modal {{needLogin?'show':''}}">
   <view class="cu-dialog">
-    <view class="bg-img" style="background-image: url('https://ossweb-img.qq.com/images/lol/web201310/skin/big91012.jpg');height:200px;">
+    <view class="bg-img" style="background-image: url('https://yunxunjg-yunmall.oss-cn-hangzhou.aliyuncs.com/MaiaSalon_logo_1.jpg');height:200px;">
       <view class="cu-bar justify-end text-white">
         <!-- <view class="action" bindtap="hideModal">
           <text class="cuIcon-close "></text>

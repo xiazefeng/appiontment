@@ -1,5 +1,5 @@
 <!--pages/goods/detail/detail.wxml-->
-<cu-custom bgColor="bg-gradual-pink" isCustom="{{true}}">
+<cu-custom bgColor="bg-gradual-blue" isCustom="{{true}}">
   <view slot="content">详情</view>
 </cu-custom>
 <!-- 轮播 -->

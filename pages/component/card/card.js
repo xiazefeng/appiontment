@@ -31,7 +31,7 @@ Component({
     toItemPage:function(e){
       wx.setStorageSync('currentGoods', JSON.stringify(e.currentTarget.dataset.goods));
       wx.navigateTo({
-        url: '../../pages/goods/home/home'
+        url: '/pages/goods/home/home'
       })
     }
   }

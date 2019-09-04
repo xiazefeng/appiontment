@@ -12,6 +12,7 @@ Page({
    * 生成订单，同时调起微信支付下单。
    */
   handleSubmit: function() {
+ 
     const {
       currentGoods,
       loading
@@ -35,11 +36,11 @@ Page({
           this.setData({
             loading: false,
           })
-          wx.showToast({
-            title: '调起微信支付失败',
-            image: '/images/cancle.png'
-          })
-          return;
+          // wx.showToast({
+          //   title: '调起微信支付失败',
+          //   image: '/images/cancle.png'
+          // })
+          // return;
           // }
           //发起微信支付
           wx.requestPayment({
@@ -52,20 +53,23 @@ Page({
               this.setData({
                 loading: false,
               })
-              console.info(res)
-              //支付成功 
+              wx.navigateTo({
+                url: '/pages/goods/finished/finished?price=' + currentGoods.price,
+              })
             },
             fail: res => {
               this.setData({
                 loading: false,
               })
-              console.info(res)
+              wx.showToast({
+                title: '取消支付',
+                image: '/images/cancle.png'
+              })
             },
             complete: res => {
               this.setData({
                 loading: false,
               })
-              console.info(res)
             }
           })
         },

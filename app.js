@@ -7,7 +7,6 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    this.wxLoginRequest();
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -17,6 +16,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
+              this.wxLoginRequest();
 
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
@@ -39,19 +39,24 @@ App({
     })
   },
   wxLoginRequest:function(){
+    if (!this.globalData.userInfo) {
+      this.globalData.loginStatus = false;
+      return
+    }
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         wx.request({
           url: this.globalData.baseUrl + '/auth/code',
-          data: { ...res, sysId:this.globalData.sysId},
+          data: { ...res, sysId: this.globalData.sysId, ...this.globalData.userInfo},
           method: 'POST',
           success: res => {
             if (res.data.openId) {
               wx.setStorageSync('userOpenId', res.data.openId);
               wx.setStorageSync('userSessionKey', res.data.sessionKey);
               wx.setStorageSync('userUnionId', res.data.unionId);
+              
             } else {
               //TODO 如果没有获取到信息，则提示重新登陆。
               this.globalData.loginStatus = false;
@@ -66,8 +71,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl:"http://172.16.10.27:9000",
-    // baseUrl:"https://wx.autoinet.cn/mini",
+    // baseUrl:"http://172.16.10.27:9000",
+    baseUrl:"https://wx.autoinet.cn/mini",
     loginStatus:true,
     sysId:1
   },

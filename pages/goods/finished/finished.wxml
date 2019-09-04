@@ -1,0 +1,21 @@
+<cu-custom bgColor="bg-gradual-blue" isCustom="{{true}}">
+  <view slot="content">提交订单</view>
+</cu-custom>
+<view class=" padding-xs flex align-center">
+  <view class="flex-sub text-center">
+    <view class=" text-xsl padding">
+      <text class=" cuIcon-roundcheckfill text-green"></text>
+    </view>
+    <view class=" text-xl ">
+      <text class="text-black text-bold">支付成功</text>
+    </view>
+    <view class=" text-xxl padding " style="font-size:60rpx">
+      <text class="text-price text-red">{{price}}</text>
+    </view>
+    <view class="padding">
+      <view class="margin-tb-sm text-center">
+        <button class="cu-btn line-green show" bindtap="showOrder">返回首页</button>
+      </view>
+    </view>
+  </view>
+</view>

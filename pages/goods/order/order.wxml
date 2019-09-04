@@ -1,7 +1,8 @@
 <!--pages/goods/order/order.wxml{{ currentGoods.goodsIndexPic}}-->
-<cu-custom bgColor="bg-gradual-pink" isCustom="{{true}}">
+<cu-custom bgColor="bg-gradual-blue" isCustom="{{true}}">
   <view slot="content">提交订单</view>
 </cu-custom>
+<loading loading="{{loading}}" type="circular1" />
 <van-card
   num="1"
   price="{{currentGoods.price}}"
