@@ -303,7 +303,7 @@ Component({
       })
     } else {
       this.setData({
-        showLogin: false
+        showLogin: false,
       })
     }
     const userPhone = wx.getStorageSync('userPhone');

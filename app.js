@@ -39,10 +39,10 @@ App({
     })
   },
   wxLoginRequest:function(){
-    if (!this.globalData.userInfo) {
-      this.globalData.loginStatus = false;
-      return;
-    }
+    // if (!this.globalData.userInfo) {
+    //   this.globalData.loginStatus = false;
+    //   return;
+    // }
     // 登录
     wx.login({
       success: res => {

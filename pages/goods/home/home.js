@@ -14,10 +14,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.watch$("showLogin", (val, old) => {
+    app.watch$("loginStatus", (val, old) => {
+      if (app.globalData.loginStatus){
         this.setData({
-          modalVisible: !!val
+          modalVisible: false
         })
+      }
     });
 
     let currentGoods = JSON.parse(wx.getStorageSync('currentGoods'));
@@ -26,8 +28,8 @@ Page({
     });
   },
   closeLoginModal:function(){
-    app.setGlobalData({
-      showLogin: false
+    this.setData({
+      modalVisible: false
     })
   },
   /**
@@ -35,8 +37,8 @@ Page({
    */
   handleBuy:function(){
     if (!app.globalData.loginStatus){
-      app.setGlobalData({
-        showLogin:true
+      this.setData({
+        modalVisible: true
       })
     }else{
       //已经登录，跳转到支付页面
@@ -50,9 +52,6 @@ Page({
       this.closeLoginModal();
       app.wxLoginRequest();
       app.globalData.userInfo = e.detail.userInfo;
-      this.setData({
-        modalVisible:false
-      })
     }
   },
   toDetailPage:function(){
