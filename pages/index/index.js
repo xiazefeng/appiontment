@@ -16,7 +16,8 @@ Page({
     PageCur: 'basics',
     action: 'stop',
     needLogin: false, //是否需要登录
-    aa: true
+    aa: true,
+    showLogin:false,
   },
   //事件处理函数
   // bindViewTap: function() {
@@ -76,25 +77,8 @@ Page({
     this.reloadCenter();
   },
   onLoad: function(options) {
-    // console.log(app.globalData.loginStatus)
-    // if (!app.globalData.loginStatus){
-    //   this.setData({
-    //     needLogin: true
-    //   })
-    //   return;
-    // }
-    // if (options.PageCur && options.PageCur ==='about'){
-    //   this.setData({
-    //     PageCur: 'about',
-    //     defaultTabCur:'usable',
-    //     action : "refreshDown"
-    //   })
-    //   wx.setNavigationBarTitle({
-    //     title: '我的'
-    //   })
-    // }
+  
     app.watch$("loginStatus", (val, old) => {
-      console.log(val,old ); 
       if (!val) {
         this.setData({
           needLogin: true

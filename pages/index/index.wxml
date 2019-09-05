@@ -16,7 +16,7 @@
 </view> -->
 
 <appointment wx:if="{{PageCur=='basics'}}" action="{{action}}"  bindloadFinish="loadFinish"></appointment>
-<mine wx:if="{{PageCur=='about'}}" action="{{action}}" defaultTabCur="{{defaultTabCur}}" bindloadFinish="loadFinish" ></mine>
+<mine wx:if="{{PageCur=='about'}}" action="{{action}}" defaultTabCur="{{defaultTabCur}}" bindloadFinish="loadFinish"  ></mine>
 
 <!-- 导航 -->
 <view class="cu-bar tabbar bg-white shadow foot">
@@ -36,20 +36,3 @@
 <view class='cu-tabbar-height'>
 </view>
 
-<!-- 登录页面 -->
-<view class="cu-modal {{needLogin?'show':''}}">
-  <view class="cu-dialog">
-    <view class="bg-img" style="background-image: url('https://yunxunjg-yunmall.oss-cn-hangzhou.aliyuncs.com/MaiaSalon_logo_1.jpg');height:200px;">
-      <view class="cu-bar justify-end text-white">
-        <!-- <view class="action" bindtap="hideModal">
-          <text class="cuIcon-close "></text>
-        </view> -->
-      </view>
-    </view>
-    <view class="cu-bar bg-white">
-      <view class="action margin-0 flex-sub  solid-left" >
-      <button class='cu-btn  bg-green shadow lg margin-tb-sm' open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
-      </view>
-    </view>
-  </view>
-</view>

@@ -1,1 +1,4 @@
 /* pages/goods/home/home.wxss */
+.desc-txt{
+  color:rgba(0,0,0,0.65);
+}

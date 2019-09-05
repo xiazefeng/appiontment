@@ -10,6 +10,8 @@ Component({
    * 页面的初始数据
    */
   data: {
+    modalVisible: false,
+    showLogin: true,
     TabCur: 'usable',
     constants: constants,
     util: util,
@@ -110,7 +112,7 @@ Component({
           })
           console.log("已全部加载完毕。。。")
         }
-      }else{
+      } else {
         this.setData({
           loading: false,
           loadingText: "已全部加载完毕"
@@ -134,7 +136,7 @@ Component({
       //     })
       //   }, 500)
       wx.request({
-        url: TabCur !== 'all' ? app.globalData.baseUrl + '/center/goods/' + TabCur : app.globalData.baseUrl +'/center/order',
+        url: TabCur !== 'all' ? app.globalData.baseUrl + '/center/goods/' + TabCur : app.globalData.baseUrl + '/center/order',
         method: 'POST',
         data: {
           sysId: app.globalData.sysId,
@@ -160,7 +162,7 @@ Component({
                   isFrist: false,
                 }
               })
-            } else if (res.data.orderDTOList && res.data.orderDTOList.length > 0){
+            } else if (res.data.orderDTOList && res.data.orderDTOList.length > 0) {
               this.setData({
                 loading: false,
                 loadingText: "",
@@ -170,7 +172,7 @@ Component({
                   isFrist: false,
                 }
               })
-            }else {
+            } else {
               this.setData({
                 loading: false,
                 loadingText: "",
@@ -190,12 +192,12 @@ Component({
               res.data.clientGoodsVOList.map(item => {
                 orderList.push(item);
               })
-            } else if (res.data.orderDTOList && res.data.orderDTOList.length > 0){
+            } else if (res.data.orderDTOList && res.data.orderDTOList.length > 0) {
               res.data.orderDTOList.map(item => {
                 orderList.push(item);
               })
             }
-            
+
             const key = TabCurNum + ".orderList";
             this.setData({
               loading: false,
@@ -235,17 +237,17 @@ Component({
     toAppointment(e) {
       const id = e.currentTarget.dataset.id;
       const appointId = e.currentTarget.dataset.aid;
-      if (appointId){
+      if (appointId) {
         wx.navigateTo({
           url: '/pages/mine/appointment/index?clientGoodsId=' + id + '&appointId=' + appointId,
         })
-      }else{
+      } else {
         wx.navigateTo({
           url: '/pages/mine/appointment/index?clientGoodsId=' + id,
         })
       }
     },
-    getPhoneNumber: function (e) {
+    getPhoneNumber: function(e) {
       const openId = wx.getStorageSync("userOpenId");
       wx.request({
         url: app.globalData.baseUrl + '/auth/phone',
@@ -256,7 +258,7 @@ Component({
           ...e.detail,
         },
         success: res => {
-          if (res && res.data.phoneNumber){
+          if (res && res.data.phoneNumber) {
             wx.setStorageSync("userPhone", res.data.phoneNumber);
             this.setData({
               userPhone: res.data.phoneNumber
@@ -267,16 +269,49 @@ Component({
               url: '/pages/mine/appointment/index?clientGoodsId=' + id,
             })
           }
-         }
+        }
       })
-    }
+    },
+    showLoginModal: function() {
+      this.setData({
+        modalVisible: true
+      })
+    },
+    closeLoginModal: function() {
+      this.setData({
+        modalVisible: false
+      })
+    },
+    getUserInfo: function(e) {
+      if (e && e.detail.errMsg == 'getUserInfo:ok') {
+        this.closeLoginModal();
+        app.wxLoginRequest();
+        app.globalData.userInfo = e.detail.userInfo
+        if (e.detail.userInfo){
+          this.setData({
+            userInfo: e.detail.userInfo,
+            showLogin:false,
+          })
+        }
+      }
+    },
   },
   attached: function() {
+    if (!app.globalData.loginStatus) {
+      this.setData({
+        showLogin: true,
+      })
+    } else {
+      this.setData({
+        showLogin: false
+      })
+    }
     const userPhone = wx.getStorageSync('userPhone');
     this.setData({
       userInfo: app.globalData.userInfo,
       userPhone
     })
+
     this.setData({
       action: "refreshDown"
     });

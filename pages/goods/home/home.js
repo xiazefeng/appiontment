@@ -1,4 +1,5 @@
 // pages/goods/home/home.js
+const app = getApp();
 Page({
 
   /**
@@ -6,25 +7,53 @@ Page({
    */
   data: {
     nodes:'',
+    modalVisible:false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    app.watch$("showLogin", (val, old) => {
+        this.setData({
+          modalVisible: !!val
+        })
+    });
+
     let currentGoods = JSON.parse(wx.getStorageSync('currentGoods'));
     this.setData({
       currentGoods
     });
   },
+  closeLoginModal:function(){
+    app.setGlobalData({
+      showLogin: false
+    })
+  },
   /**
    * 立即购买
    */
   handleBuy:function(){
-    wx.navigateTo({
-      url: '../order/order'
-    })
+    if (!app.globalData.loginStatus){
+      app.setGlobalData({
+        showLogin:true
+      })
+    }else{
+      //已经登录，跳转到支付页面
+      wx.navigateTo({
+        url: '../order/order'
+      })
+    }
+  },
+  getUserInfo: function (e) {
+    if (e && e.detail.errMsg == 'getUserInfo:ok') {
+      this.closeLoginModal();
+      app.wxLoginRequest();
+      app.globalData.userInfo = e.detail.userInfo;
+      this.setData({
+        modalVisible:false
+      })
+    }
   },
   toDetailPage:function(){
     wx.navigateTo({

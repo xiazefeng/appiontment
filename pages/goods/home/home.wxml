@@ -3,7 +3,7 @@
   <view slot="content">商品</view>
 </cu-custom>
 <!-- 图片 -->
-<view class="bg-img bg-mask padding-top-xs flex align-end" style="background-image: url('{{currentGoods.goodsIntroductionPic}}');height: 414rpx;background-size:contain;background-color:#ffffff;">
+<view class="bg-img bg-mask padding-top-xs flex align-end" style="background-image: url('{{currentGoods.goodsIntroductionPic}}');height: 414rpx;background-size:cover;background-position:center center;background-color:#ffffff;">
   <view class="padding-lr-sm flex-sub" style="background-color:rgba(0, 0, 0, 0.3);color:white">
     <!-- <view class="padding-xs text-lg" wx:if="{{currentGoods.title}}">
       {{currentGoods.title}}
@@ -16,12 +16,12 @@
 <!-- <swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
   <swiper-item wx:for="{{currentGoods.goodsDetailPic}}" wx:key>
     <image src="{{item}}" mode="aspectFill" ></image> -->
-    <!-- <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video> -->
-  <!-- </swiper-item>
+<!-- <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video> -->
+<!-- </swiper-item>
 </swiper> -->
 
 <view class="cu-bar bg-white padding-lr padding-top" style="min-height:60rpx;">
-  <view class="text-lg text-bold" >
+  <view class="text-lg text-bold">
     {{currentGoods.goodsName}}
   </view>
   <view>
@@ -54,4 +54,32 @@
   </view>
   <!-- <view class="bg-orange light submit">查看详情</view> -->
   <view class="bg-red submit" style="width:50%" bindtap="handleBuy">立即购买</view>
+</view>
+
+<!-- 登录页面 -->
+<view class="cu-modal {{modalVisible ? 'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">您还未登录</view>
+      <view class="action" bindtap="closeLoginModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="bg-img" style="background-image: url('https://yunxunjg-yunmall.oss-cn-hangzhou.aliyuncs.com/MaiaSalon_logo_3.jpg');height:200px;">
+    <view class="desc-txt" >
+      请您登录后再进行操作
+    </view>
+      <view class="cu-bar justify-end text-white">
+        <!-- <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close "></text>
+        </view> -->
+      </view>
+    </view>
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub  solid-left">
+        <button class='cu-btn  line-blue shadow lg margin-tb-sm margin-right' bindtap="closeLoginModal">暂不登录</button>
+        <button class='cu-btn  bg-blue shadow lg margin-tb-sm' open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
+      </view>
+    </view>
+  </view>
 </view>

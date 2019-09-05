@@ -22,7 +22,8 @@ Page({
         return `${value}月`;
       }
       return value;
-    }
+    },
+   
   },
 
   /**

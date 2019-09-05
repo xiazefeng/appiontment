@@ -1,10 +1,18 @@
 <wxs src="../../../utils/time.wxs" module="time" />
 <scroll-view scroll-y class="scrollPage">
   <view class="UCenter-bg nav">
-    <image src="{{userInfo.avatarUrl}}" class="cu-avatar round xl" mode="widthFix"></image>
+    <block wx:if="{{!showLogin}}">  
+    <image src="{{userInfo.avatarUrl}}"  class="cu-avatar round xl" mode="widthFix"></image>
     <view class="text-xl padding">{{userInfo.nickName}}
       <!-- <text class="text-df">v2.0</text> -->
     </view>
+    </block>
+    <block wx:else>
+     <image src="/images/un_login.png"  class="cu-avatar round xl" mode="widthFix"></image>
+     <view class="text-xl padding">
+      <button  class="cu-btn bg-gray" bindtap="showLoginModal">点击登录</button>
+    </view>
+    </block>
     <!-- <view class="margin-top-sm">
       <text>By:文晓港</text>
     </view> -->
@@ -186,3 +194,31 @@
     <loading loading="{{loading && action === 'refreshUp'}}" title="{{loadingText}}" size="20px" type="spinner" />
   </view>
 </scroll-view>
+
+<!-- 登录页面 -->
+<view class="cu-modal {{modalVisible ? 'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">您还未登录</view>
+      <view class="action" bindtap="closeLoginModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="bg-img" style="background-image: url('https://yunxunjg-yunmall.oss-cn-hangzhou.aliyuncs.com/MaiaSalon_logo_3.jpg');height:200px;">
+    <view class="desc-txt" >
+      请您登录后再进行操作
+    </view>
+      <view class="cu-bar justify-end text-white">
+        <!-- <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close "></text>
+        </view> -->
+      </view>
+    </view>
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub  solid-left">
+        <button class='cu-btn  line-blue shadow lg margin-tb-sm margin-right' bindtap="closeLoginModal">暂不登录</button>
+        <button class='cu-btn  bg-blue shadow lg margin-tb-sm' open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
+      </view>
+    </view>
+  </view>
+</view>
