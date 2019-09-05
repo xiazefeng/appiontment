@@ -53,6 +53,10 @@ Component({
     defaultTabCur: {
       type: String,
       value: '',
+    },
+    myStatus:{
+      type:Boolean,
+      value:false,
     }
   },
   /**
@@ -285,8 +289,8 @@ Component({
     getUserInfo: function(e) {
       if (e && e.detail.errMsg == 'getUserInfo:ok') {
         this.closeLoginModal();
-        app.wxLoginRequest();
         app.globalData.userInfo = e.detail.userInfo
+        app.wxLoginRequest();
         if (e.detail.userInfo){
           this.setData({
             userInfo: e.detail.userInfo,
@@ -297,7 +301,7 @@ Component({
     },
   },
   attached: function() {
-    if (!app.globalData.loginStatus) {
+    if (!this.properties.myStatus) {
       this.setData({
         showLogin: true,
       })

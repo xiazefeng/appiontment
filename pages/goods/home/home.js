@@ -8,18 +8,21 @@ Page({
   data: {
     nodes:'',
     modalVisible:false,
+    myStatus:app.globalData.loginStatus
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      myStatus: app.globalData.loginStatus
+    })
+  
     app.watch$("loginStatus", (val, old) => {
-      if (app.globalData.loginStatus){
-        this.setData({
-          modalVisible: false
-        })
-      }
+      this.setData({
+        myStatus:val
+      })
     });
 
     let currentGoods = JSON.parse(wx.getStorageSync('currentGoods'));
@@ -36,12 +39,12 @@ Page({
    * 立即购买
    */
   handleBuy:function(){
-    if (!app.globalData.loginStatus){
+    if (!this.data.myStatus){
       this.setData({
         modalVisible: true
       })
     }else{
-      //已经登录，跳转到支付页面
+      // //已经登录，跳转到支付页面
       wx.navigateTo({
         url: '../order/order'
       })
@@ -50,8 +53,8 @@ Page({
   getUserInfo: function (e) {
     if (e && e.detail.errMsg == 'getUserInfo:ok') {
       this.closeLoginModal();
-      app.wxLoginRequest();
       app.globalData.userInfo = e.detail.userInfo;
+      app.wxLoginRequest();
     }
   },
   toDetailPage:function(){

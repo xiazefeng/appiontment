@@ -18,6 +18,7 @@ Page({
     needLogin: false, //是否需要登录
     aa: true,
     showLogin:false,
+    myStatus:app.globalData.loginStatus
   },
   //事件处理函数
   // bindViewTap: function() {
@@ -77,8 +78,10 @@ Page({
     this.reloadCenter();
   },
   onLoad: function(options) {
-  
     app.watch$("loginStatus", (val, old) => {
+      this.setData({
+        myStatus:val
+      })
       if (!val) {
         this.setData({
           needLogin: true

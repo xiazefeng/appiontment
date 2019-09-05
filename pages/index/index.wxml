@@ -16,7 +16,7 @@
 </view> -->
 
 <appointment wx:if="{{PageCur=='basics'}}" action="{{action}}"  bindloadFinish="loadFinish"></appointment>
-<mine wx:if="{{PageCur=='about'}}" action="{{action}}" defaultTabCur="{{defaultTabCur}}" bindloadFinish="loadFinish"  ></mine>
+<mine wx:if="{{PageCur=='about'}}" action="{{action}}" defaultTabCur="{{defaultTabCur}}" myStatus="{{myStatus}}" bindloadFinish="loadFinish"  ></mine>
 
 <!-- 导航 -->
 <view class="cu-bar tabbar bg-white shadow foot">

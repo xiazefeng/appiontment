@@ -39,10 +39,12 @@ App({
     })
   },
   wxLoginRequest:function(){
-    // if (!this.globalData.userInfo) {
-    //   this.globalData.loginStatus = false;
-    //   return;
-    // }
+    if (!this.globalData.userInfo) {
+      this.globalData.loginStatus = false;
+      return;
+    }else{
+      this.globalData.loginStatus = true;
+    }
     // 登录
     wx.login({
       success: res => {
@@ -57,10 +59,6 @@ App({
               wx.setStorageSync('userOpenId', res.data.openId);
               wx.setStorageSync('userSessionKey', res.data.sessionKey);
               wx.setStorageSync('userUnionId', res.data.unionId);
-              this.globalData.loginStatus = true;
-            } else {
-              //TODO 如果没有获取到信息，则提示重新登陆。
-              this.globalData.loginStatus = false;
             }
           },
           fail: e => {
@@ -74,7 +72,7 @@ App({
     userInfo: null,
     // baseUrl:"http://172.16.10.27:9000",
     baseUrl:"https://wx.autoinet.cn/mini",
-    loginStatus:false,
+    loginStatus:true,
     sysId:1,
     showLogin:false,
   },
